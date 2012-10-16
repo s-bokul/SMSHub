@@ -1,8 +1,37 @@
-<?php
-/**
- * Created by JetBrains PhpStorm.
- * User: bokul
- * Date: 10/16/12
- * Time: 10:21 PM
- * To change this template use File | Settings | File Templates.
- */
+<div class="footer">
+    <div id="innerfooter">
+
+        <div id="copyright">
+            <img src="images/logo.jpg" alt="logo"/>
+            <a>&copy; 2012 SMSHUB</a>
+        </div>
+
+        <ul class="othernav">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Price</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Sign Up</a></li>
+        </ul>
+
+        <ul class="othernav">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Price</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Sign Up</a></li>
+        </ul>
+
+        <ul class="othernav">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Price</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Sign Up</a></li>
+        </ul>
+
+        <ul class="social">
+            <li><a href="#" class="fb">Facebook</a></li>
+            <li><a href="#" class="twit">Twitter</a></li>
+            <li><a href="#" class="gplus">Google+</a></li>
+        </ul>
+
+    </div><!-- inner div ends -->
+</div><!-- footer ends -->

@@ -24,8 +24,8 @@ class Welcome extends My_Controller {
 		//$this->load->view('welcome_message');
         $data = null;
         $error = null;
-        $title = null;
-        $this->template->write_view('content','welcome_message',array('data'=>$data,'error'=>$error,'title'=>$title));
+        $title = 'home';
+        $this->template->write_view('content','pages/home',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
 	}
 }
