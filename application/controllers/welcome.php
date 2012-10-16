@@ -1,6 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+include_once(APPPATH.'libraries/My_Controller.php');
+
+class Welcome extends My_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -19,7 +21,12 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		//$this->load->view('welcome_message');
+        $data = null;
+        $error = null;
+        $title = null;
+        $this->template->write_view('content','welcome_message',array('data'=>$data,'error'=>$error,'title'=>$title));
+        $this->template->render();
 	}
 }
 
