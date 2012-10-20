@@ -2,7 +2,7 @@
 
 include_once(APPPATH.'libraries/My_Controller.php');
 
-class Welcome extends My_Controller {
+class Pages extends My_Controller {
 
 	/**
 	 * Index Page for this controller.
