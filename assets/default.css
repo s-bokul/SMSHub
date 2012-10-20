@@ -693,6 +693,10 @@ a.registerbtn:hover{
 	color:#fff;
 }
 
+#signup .error{
+    color: #ff0000 !important;
+}
+
 
 
 

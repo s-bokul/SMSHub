@@ -2,7 +2,7 @@
     <div id="innerfooter">
 
         <div id="copyright">
-            <img src="images/logo.jpg" alt="logo"/>
+            <img src="<?php echo base_url(); ?>/assets/images/logo.jpg" alt="logo"/>
             <a>&copy; 2012 SMSHUB</a>
         </div>
 

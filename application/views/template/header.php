@@ -32,7 +32,7 @@
             </div>
         </div>
         <!-- Log In function ends -->
-        <a class="register" href="#">Register</a>
+        <a class="register" href="/register">Register</a>
     </div>
 </div><!-- NAVBAR ENDS -->
 <div class="header">

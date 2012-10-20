@@ -19,15 +19,52 @@ class Pages extends My_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
+
+    public function __construct(){
+        parent::__construct();
+    }
+
+    function _remap( $method )
+    {
+        // $method contains the second segment of your URI
+        switch( $method )
+        {
+            case 'index':
+                $this->index();
+                break;
+
+            case 'about-me':
+                $this->about_me();
+                break;
+
+            case 'successful':
+                $this->display_successful_message();
+                break;
+
+            default:
+                $this->page_not_found();
+                break;
+        }
+    }
+
 	public function index()
 	{
 		//$this->load->view('welcome_message');
         $data = null;
         $error = null;
-        $title = 'home';
+        $title = 'Home';
         $this->template->write_view('content','pages/home',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
 	}
+
+    public function page_not_found()
+    {
+        $data = null;
+        $error = null;
+        $title = '404 Not Found';
+        $this->template->write_view('content','pages/not_found',array('data'=>$data,'error'=>$error,'title'=>$title));
+        $this->template->render();
+    }
 }
 
 /* End of file welcome.php */
