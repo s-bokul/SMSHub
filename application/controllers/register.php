@@ -27,11 +27,23 @@ class Register extends My_Controller {
     public function index()
     {
         //$this->load->view('welcome_message');
+        $this->load->helper('form');
         $data = null;
         $error = null;
-        $title = 'Home';
+        $title = 'Register';
         $this->template->write_view('content','pages/register',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
+    }
+
+    public function save()
+    {
+        $data = $this->input->post();
+        if($_POST)
+        {
+            $this->load->model('user_model');
+            $result = $this->user_model->create($data);
+        }
+        die;
     }
 
 }

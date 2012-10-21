@@ -10,10 +10,14 @@
         $("#signup").validate({
             rules: {
                 email: {required:true, email:true},
-                firstname: { required:true, maxlength: 32, names:true },
-                lastname: { required:true, maxlength: 32, names:true }
+                first_name: { required:true, maxlength: 32, names:true },
+                last_name: { required:true, maxlength: 32, names:true }
             }
         });
+
+        $("#regbtn").click(function() {
+            $('#signup').submit();
+        })
     });
 
 
@@ -26,7 +30,10 @@
     <h1>Register</h1>
 
     <div id="newcampform">
-        <form id="signup" name="signup" method="post">
+
+        <?php echo form_open(site_url('register/save'),array('name'=>'signup','id'=>'signup', 'class'=>'signup'));?>
+
+        <!--<form id="signup" name="signup" method="post">-->
             <div>
                 <label>Email Address</label>
                 <input type="text" name="email" id="email">
@@ -42,24 +49,24 @@
 
             <div>
                 <label>Mobile Number</label>
-                <input type="text">
+                <input type="text" name="mobile_number" id="mobile_number">
                 <p>Mobile phone number (required) - Enter a valid mobile phone number. Please enter your mobile number in international format. For example, if you are registering with 0415000000 it will need to be entered as 61415000000.
                     In order to receive your password instantly, please ensure that this mobile is switched on and within network range.</p>
             </div>
 
             <div>
                 <label>First Name</label>
-                <input type="text" name="firstname" id="firstname">
+                <input type="text" name="first_name" id="first_name">
                 <label>Last Name</label>
-                <input type="text" name="lastname" id="lastname">
+                <input type="text" name="last_name" id="last_name">
                 <label>Company Name</label>
-                <input type="text">
+                <input type="text" name="company_name" id="company_name">
                 <label>Address</label>
-                <input type="text">
+                <input type="text" name="address_line_1" id="address_line_1">
                 <label>Suburbs</label>
-                <input type="text">
+                <input type="text" name="suburb" id="suburb">
                 <label>State</label>
-                <select>
+                <select name="state_code" id="state_code">
                     <option>Australian Capital Territory</option>
                     <option selected="selected">New South Wales</option>
                     <option>Northern Territory</option>
@@ -79,10 +86,10 @@
                 <label>Are you Human</label>
                 <input type="text">
             </div>
+            <a href="javascript:void(0)" id="regbtn" onclick="this.submit()" class="registerbtn">Register</a>
+            <!--<input type="submit" class="registerbtn" value="Register">-->
 
-            <input type="submit" class="registerbtn" value="Register">
-
-        </form>
+        <?php echo form_close();?>
     </div>
 
 </div><!-- content div ends -->
