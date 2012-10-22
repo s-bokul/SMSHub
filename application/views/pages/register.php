@@ -9,9 +9,12 @@
 
         $("#signup").validate({
             rules: {
-                email: {required:true, email:true},
+                email: {required:true, email:true, remote:"/register"},
                 first_name: { required:true, maxlength: 32, names:true },
                 last_name: { required:true, maxlength: 32, names:true }
+            },
+            messages:{
+                email:{ required:"Please Enter Your Email", email:"Invalid Email Address", remote:"Email Already Taken"},
             }
         });
 

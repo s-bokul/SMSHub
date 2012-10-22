@@ -70,7 +70,26 @@ class Register extends My_Controller {
         redirect('/register');
     }
 
+    function checkEmailIsUsed($email)
+    {
+        $status = false;
+        $this->load->model('user_model');
+        if($this->user_model->checkEmailIsUsed($email))
+            $status = true;
+        return $status;
+    }
+
 }
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+if(isset($_GET['email']))
+{
+    $register = new Register();
+    $status = $register->checkEmailIsUsed($_GET['email']);
+    if($status == true)
+        echo 'false';
+    else
+        echo 'true';
+    die();
+}
+/* End of file register.php */
+/* Location: ./application/controllers/register.php */

@@ -17,7 +17,14 @@ class User_model extends CI_Model{
         return $status;
 	}
 	
-
+    public function checkEmailIsUsed($email)
+    {
+        $status = false;
+        $query = $this->db->get_where('smshub_users', array('email' => $email));
+        if($query->num_rows() > 0)
+            $status = true;
+        return $status;
+    }
 
 }
 
