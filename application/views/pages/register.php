@@ -18,6 +18,18 @@
         $("#regbtn").click(function() {
             $('#signup').submit();
         })
+
+        $('.successbox').hide();//Hide the div
+        $('.warningbox').hide();
+        $('.errormsgbox').hide();
+
+        $(".successbox").fadeIn(2000); //Add a fade in effect that will last for 2000 millisecond
+        $(".warningbox").fadeIn(2000);
+        $(".errormsgbox").fadeIn(2000);
+
+        $(".successbox").fadeOut(2000); //Add a fade in effect that will last for 2000 millisecond
+        $(".warningbox").fadeOut(2000);
+        $(".errormsgbox").fadeOut(2000);
     });
 
 
@@ -28,6 +40,16 @@
 <div class="registerpage">
 
     <h1>Register</h1>
+
+    <div>
+        <?php
+            $message = json_decode($this->session->flashdata('msg'), 1);
+            echo '<div class="'.$message['class'].'" > '.$message['msg'].' </div>'
+        ?>
+        <!--<div class="successbox" > This is a success message Box </div>
+        <div class="warningbox" > This is a warning message Box </div>
+        <div class="errormsgbox" > This is a Error  message Box </div>-->
+    </div>
 
     <div id="newcampform">
 
@@ -77,14 +99,6 @@
                     <option>Western Australia</option>
                 </select>
                 <br>
-                <br>
-                <label>Referral Code</label>
-                <input type="text">
-            </div>
-
-            <div>
-                <label>Are you Human</label>
-                <input type="text">
             </div>
             <a href="javascript:void(0)" id="regbtn" onclick="this.submit()" class="registerbtn">Register</a>
             <!--<input type="submit" class="registerbtn" value="Register">-->

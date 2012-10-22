@@ -22,6 +22,7 @@ class Register extends My_Controller {
 
     public function __construct(){
         parent::__construct();
+        $this->load->helper('url');
     }
 
     public function index()
@@ -41,9 +42,32 @@ class Register extends My_Controller {
         if($_POST)
         {
             $this->load->model('user_model');
-            $result = $this->user_model->create($data);
+            if($this->user_model->create($data))
+            {
+                $msg = array(
+                    'status' => true,
+                    'class' => 'successbox',
+                    'msg' => 'Registration complete successfully.'
+                );
+
+                $data = json_encode($msg);
+
+                $this->session->set_flashdata('msg', $data);
+            }
+            else
+            {
+                $msg = array(
+                    'status' => false,
+                    'class' => 'errormsgbox',
+                    'msg' => 'Registration failed please try again.'
+                );
+
+                $data = json_encode($msg);
+
+                $this->session->set_flashdata('msg', $data);
+            }
         }
-        die;
+        redirect('/register');
     }
 
 }

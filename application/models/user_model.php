@@ -10,10 +10,11 @@ class User_model extends CI_Model{
 	}
 	
 	public function create($params){
-
+        $status = false;
         $this->db->set($params);
-        $this->db->insert('smshub_users');
-		return true;
+        if($this->db->insert('smshub_users'))
+		$status = true;
+        return $status;
 	}
 	
 
