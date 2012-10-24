@@ -14,11 +14,11 @@
 
             <div style="clear:both"></div>
             <div id="loginBox">
-                <form id="loginForm">
+                <form id="loginForm" method="post" action="login/login_check">
                     <fieldset id="body">
                         <fieldset>
-                            <label for="email">Mobile No#</label>
-                            <input type="text" name="email" id="email"/>
+                            <label for="mobile_number">Mobile No#</label>
+                            <input type="text" name="mobile_number" id="mobile_number"/>
                         </fieldset>
                         <fieldset>
                             <label for="password">Password</label>

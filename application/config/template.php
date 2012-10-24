@@ -67,6 +67,17 @@ $template['default']['parser'] = 'parser';
 $template['default']['parser_method'] = 'parse';
 $template['default']['parse_template'] = FALSE;
 
+$template['user']['template'] = 'template/user/main';
+$template['user']['regions'] = array(
+    'head',
+    'header',
+    'content',
+    'footer',
+);
+$template['user']['parser'] = 'parser';
+$template['user']['parser_method'] = 'parse';
+$template['user']['parse_template'] = FALSE;
+
 
 $template['admin']['template'] = 'admin/main';
 $template['admin']['regions'] = array(

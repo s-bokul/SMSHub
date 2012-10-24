@@ -1,13 +1,4 @@
-﻿<?php
-/**
- * Created by JetBrains PhpStorm.
- * User: bokul
- * Date: 10/16/12
- * Time: 10:20 PM
- * To change this template use File | Settings | File Templates.
- */
-?>
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <!-- #BeginTemplate "default.dwt" -->

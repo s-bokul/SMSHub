@@ -4,22 +4,6 @@ include_once(APPPATH.'libraries/My_Controller.php');
 
 class Register extends My_Controller {
 
-    /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     * 		http://example.com/index.php/welcome
-     *	- or -
-     * 		http://example.com/index.php/welcome/index
-     *	- or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/welcome/<method_name>
-     * @see http://codeigniter.com/user_guide/general/urls.html
-     */
-
     public function __construct(){
         parent::__construct();
         $this->load->helper('url');
@@ -79,12 +63,32 @@ class Register extends My_Controller {
         return $status;
     }
 
+    function checkMobileIsUsed($number)
+    {
+        $status = false;
+        $this->load->model('user_model');
+        if($this->user_model->checkMobileIsUsed($number))
+            $status = true;
+        return $status;
+    }
+
 }
 
 if(isset($_GET['email']))
 {
     $register = new Register();
     $status = $register->checkEmailIsUsed($_GET['email']);
+    if($status == true)
+        echo 'false';
+    else
+        echo 'true';
+    die();
+}
+
+if(isset($_GET['mobile_number']))
+{
+    $register = new Register();
+    $status = $register->checkMobileIsUsed($_GET['mobile_number']);
     if($status == true)
         echo 'false';
     else
