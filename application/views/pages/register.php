@@ -11,16 +11,18 @@
             rules: {
                 email: {required:true, email:true, remote:"/register"},
                 first_name: { required:true, maxlength: 32, names:true },
-                last_name: { required:true, maxlength: 32, names:true }
+                last_name: { required:true, maxlength: 32, names:true },
+                mobile_number: { required:true, remote:"/register" }
             },
             messages:{
                 email:{ required:"Please Enter Your Email", email:"Invalid Email Address", remote:"Email Already Taken"},
+                mobile_number:{ remote:"Mobile Number Already Taken"}
             }
         });
 
         $("#regbtn").click(function() {
             $('#signup').submit();
-        })
+        });
 
         $('.successbox').hide();//Hide the div
         $('.warningbox').hide();
@@ -103,7 +105,7 @@
                 </select>
                 <br>
             </div>
-            <a href="javascript:void(0)" id="regbtn" onclick="this.submit()" class="registerbtn">Register</a>
+            <a href="javascript:void(0)" id="regbtn" class="registerbtn">Register</a>
             <!--<input type="submit" class="registerbtn" value="Register">-->
 
         <?php echo form_close();?>

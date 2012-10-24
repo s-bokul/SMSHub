@@ -627,7 +627,7 @@ input:focus {
 	padding:5px 0;
 }
 
-#newcampform input[type=text]{
+#newcampform input[type=text],[type=password]{
 	width:250px;
 	margin-bottom:5px;
 	line-height:21px;
