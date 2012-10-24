@@ -35,12 +35,7 @@
 <div id="homecontent">
     <div class="innerhomeconent">
         <div class="leftcol">
-            <h3>Welcome to SMS Hub</h3>
-            <p>SMS Hub is a leading web based SMS Marketing platform that can deliver to all Australian Mobile Carriers. Although we have the lowest prices, our emphasis is on the quality of the service we provide. SMS Hub is focused on making SMS Marketing affordable to all Australian businesses at the same time ensuring that our SMS delivery is super fast to all Australian Networks.</p>
-            <p> When it comes to quality there is a wide gap in Bulk SMS gateways. Some of our clients have experienced this when sending an SMS campaign it can literally take hours for the SMS message to come through. With SMS Hub you can be confident that your messages will get delivered fast.</p>
-            <p> When it comes to quality there is a wide gap in Bulk SMS gateways. Some of our clients have experienced this when sending an SMS campaign it can literally take hours for the SMS message to come through. With SMS Hub you can be confident that your messages will get delivered fast.</p>
-            <h3>Why SMS?</h3>
-            <p>SMS Marketing is a cost effective alternative to other marketing chanels. SMS is cheaper, faster, more personalised and can provide a great ROI. Messages are sent within seconds and read within minutes.</p>
+            <h3>Price</h3>
         </div>
 
         <div class="rightcol">

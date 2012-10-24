@@ -1,12 +1,12 @@
 <div id="navbar">
     <div id="innernav">
         <ul id="headnav">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Price</a></li>
-            <li><a href="#">Why SMS?</a></li>
-            <li><a href="#">Long Code</a></li>
-            <li><a href="#">Other Services</a></li>
-            <li><a href="#">About</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/pages/price">Price</a></li>
+            <li><a href="/pages/why_sms">Why SMS?</a></li>
+            <li><a href="/pages/long_code">Long Code</a></li>
+            <li><a href="/pages/other_services">Other Services</a></li>
+            <li><a href="/pages/about">About</a></li>
         </ul>
 
         <div id="loginContainer">

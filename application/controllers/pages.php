@@ -32,10 +32,28 @@ class Pages extends My_Controller {
             case 'index':
                 $this->index();
                 break;
-
-            case 'about-me':
-                $this->about_me();
+            
+			case 'price':
+                $this->price();
                 break;
+				
+			case 'why_sms':
+                $this->why_sms();
+                break;
+				
+			case 'long_code':
+                $this->long_code();
+                break;
+				
+			case 'other_services':
+                $this->other_services();
+                break;
+
+
+            case 'about':
+                $this->about();
+                break;
+
 
             case 'successful':
                 $this->display_successful_message();
@@ -57,7 +75,52 @@ class Pages extends My_Controller {
         $this->template->render();
 	}
 
-    public function page_not_found()
+   public function price()
+    {
+        $data = null;
+        $error = null;
+        $title = 'Price';
+        $this->template->write_view('content','pages/price',array('data'=>$data,'error'=>$error,'title'=>$title));
+        $this->template->render();
+    }
+	
+  public function other_services()
+    {
+        $data = null;
+        $error = null;
+        $title = 'Other Services';
+        $this->template->write_view('content','pages/other_services',array('data'=>$data,'error'=>$error,'title'=>$title));
+        $this->template->render();
+    }
+
+  public function why_sms()
+    {
+        $data = null;
+        $error = null;
+        $title = 'Why SMS';
+        $this->template->write_view('content','pages/why_sms',array('data'=>$data,'error'=>$error,'title'=>$title));
+        $this->template->render();
+    }
+	
+  public function long_code()
+    {
+        $data = null;
+        $error = null;
+        $title = 'Long Code';
+        $this->template->write_view('content','pages/long_code',array('data'=>$data,'error'=>$error,'title'=>$title));
+        $this->template->render();
+    }
+	
+  public function about()
+    {
+        $data = null;
+        $error = null;
+        $title = 'About';
+        $this->template->write_view('content','pages/about',array('data'=>$data,'error'=>$error,'title'=>$title));
+        $this->template->render();
+    }	
+	
+  public function page_not_found()
     {
         $data = null;
         $error = null;
