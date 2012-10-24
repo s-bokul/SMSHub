@@ -5,7 +5,7 @@
         <li><a class="tel">01717579731</a></li>
         <li><a class="credit">45 Credits</a></li>
         <li><a class="purchasebtn" href="purchase.html">Purchase</a></li>
-        <li><a href="#">Logout</a></li>
+        <li><a href="login/logout">Logout</a></li>
     </ul>
 
 </div>

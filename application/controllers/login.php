@@ -56,6 +56,12 @@ class Login extends My_Controller {
         redirect('/login');
     }
 
+    public function logout()
+    {
+        $this->session->unset_userdata('user_info');
+        redirect('/login');
+    }
+
 }
 
 /* End of file login.php */

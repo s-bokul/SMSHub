@@ -10,7 +10,7 @@ class User_Controller extends CI_Controller {
             $msg = array(
                 'status' => false,
                 'class' => 'errormsgbox',
-                'msg' => 'Login failed please try again.'
+                'msg' => 'To access this page please login.'
             );
 
             $data = json_encode($msg);
