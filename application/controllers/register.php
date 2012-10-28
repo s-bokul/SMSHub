@@ -22,53 +22,90 @@ class Register extends My_Controller {
 
     public function save()
     {
+        $this->load->helper('form');
+        $this->load->library('form_validation');
         $data = $this->input->post();
         if($_POST)
         {
-            $this->load->model('user_model');
-            if($this->user_model->create($data))
+            $this->form_validation->set_rules('email', 'Email Address', 'required|Email|callback_checkEmailIsUsed');
+
+            $this->form_validation->set_rules('mobile_number', 'Mobile Number', 'required|callback_checkMobileIsUsed');
+            $this->form_validation->set_rules('first_name', 'First Name', 'required|alpha');
+            $this->form_validation->set_rules('last_name', 'Last Name', 'required|alpha');
+            $this->form_validation->set_rules('company_name', 'Company Name', 'required|alpha');
+
+
+            if ($this->form_validation->run() == FALSE)
             {
-                $msg = array(
-                    'status' => true,
-                    'class' => 'successbox',
-                    'msg' => 'Registration complete successfully.'
-                );
-
-                $data = json_encode($msg);
-
-                $this->session->set_flashdata('msg', $data);
+                $data = null;
+                $error = null;
+                $title = 'Register';
+                $this->template->write_view('content','pages/register',array('data'=>$data,'error'=>$error,'title'=>$title));
+                $this->template->render();
             }
             else
             {
-                $msg = array(
-                    'status' => false,
-                    'class' => 'errormsgbox',
-                    'msg' => 'Registration failed please try again.'
-                );
+                //$this->load->view('formsuccess');
+                $this->load->model('user_model');
+                if($this->user_model->create($data))
+                {
+                    $msg = array(
+                        'status' => true,
+                        'class' => 'successbox',
+                        'msg' => 'Registration complete successfully.'
+                    );
 
-                $data = json_encode($msg);
+                    $data = json_encode($msg);
 
-                $this->session->set_flashdata('msg', $data);
+                    $this->session->set_flashdata('msg', $data);
+                }
+                else
+                {
+                    $msg = array(
+                        'status' => false,
+                        'class' => 'errormsgbox',
+                        'msg' => 'Registration failed please try again.'
+                    );
+
+                    $data = json_encode($msg);
+
+                    $this->session->set_flashdata('msg', $data);
+                }
+
+                redirect('/register');
             }
+
+
         }
-        redirect('/register');
+
     }
 
-    function checkEmailIsUsed($email)
+    function checkEmailIsUsed($email, $internal = 1)
     {
-        $status = false;
+        $status = true;
         $this->load->model('user_model');
         if($this->user_model->checkEmailIsUsed($email))
-            $status = true;
+        {
+            if($internal == 1)
+                $this->form_validation->set_message('email_check', 'Email Already Taken');
+            $status = false;
+        }
+
         return $status;
     }
 
-    function checkMobileIsUsed($number)
+
+    function checkMobileIsUsed($number, $internal = 1)
     {
-        $status = false;
+        $status = true;
         $this->load->model('user_model');
         if($this->user_model->checkMobileIsUsed($number))
-            $status = true;
+        {
+            if($internal == 1)
+                $this->form_validation->set_message('number_check', 'Mobile Number Already Taken');
+            $status = false;
+        }
+
         return $status;
     }
 
@@ -77,22 +114,22 @@ class Register extends My_Controller {
 if(isset($_GET['email']))
 {
     $register = new Register();
-    $status = $register->checkEmailIsUsed($_GET['email']);
+    $status = $register->checkEmailIsUsed($_GET['email'], 0);
     if($status == true)
-        echo 'false';
-    else
         echo 'true';
+    else
+        echo 'false';
     die();
 }
 
 if(isset($_GET['mobile_number']))
 {
     $register = new Register();
-    $status = $register->checkMobileIsUsed($_GET['mobile_number']);
+    $status = $register->checkMobileIsUsed($_GET['mobile_number'], 0);
     if($status == true)
-        echo 'false';
-    else
         echo 'true';
+    else
+        echo 'false';
     die();
 }
 /* End of file register.php */
