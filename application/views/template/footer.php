@@ -28,10 +28,9 @@
         </ul>
 
         <ul class="social">
-            <li><a href="/">Home</a></li>
-            <li><a href="/pages/price">Price</a></li>
-            <li><a href="/pages/about">About</a></li>
-            <li><a href="/register">Sign Up</a></li>
+            <li><a href="#" class="fb">Facebook</a></li>
+            <li><a href="#" class="twit">Twitter</a></li>
+            <li><a href="#" class="gplus">Google+</a></li>
         </ul>
 
     </div><!-- inner div ends -->
