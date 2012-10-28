@@ -37,15 +37,15 @@ class Pages extends My_Controller {
                 $this->price();
                 break;
 				
-			case 'why_sms':
+			case 'why-sms':
                 $this->why_sms();
                 break;
 				
-			case 'long_code':
+			case 'long-code':
                 $this->long_code();
                 break;
 				
-			case 'other_services':
+			case 'other-services':
                 $this->other_services();
                 break;
 

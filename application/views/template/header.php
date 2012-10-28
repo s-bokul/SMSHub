@@ -3,9 +3,9 @@
         <ul id="headnav">
             <li><a href="/">Home</a></li>
             <li><a href="/pages/price">Price</a></li>
-            <li><a href="/pages/why_sms">Why SMS?</a></li>
-            <li><a href="/pages/long_code">Long Code</a></li>
-            <li><a href="/pages/other_services">Other Services</a></li>
+            <li><a href="/pages/why-sms">Why SMS?</a></li>
+            <li><a href="/pages/long-code">Long Code</a></li>
+            <li><a href="/pages/other-services">Other Services</a></li>
             <li><a href="/pages/about">About</a></li>
         </ul>
 
@@ -14,7 +14,7 @@
 
             <div style="clear:both"></div>
             <div id="loginBox">
-                <form id="loginForm" method="post" action="login/login_check">
+                <form id="loginForm" method="post" action="/login/login_check">
                     <fieldset id="body">
                         <fieldset>
                             <label for="mobile_number">Mobile No#</label>
