@@ -59,7 +59,7 @@
 
     <div id="newcampform">
 
-        <?php echo form_open(site_url('register/save'),array('name'=>'signup','id'=>'signup', 'class'=>'signup'));?>
+        <?php echo form_open(site_url('/register/save'),array('name'=>'signup','id'=>'signup', 'class'=>'signup'));?>
 
         <!--<form id="signup" name="signup" method="post">-->
             <div>

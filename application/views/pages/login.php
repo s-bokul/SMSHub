@@ -1,9 +1,9 @@
 <script type="text/javascript">
     $(document).ready(function() {
 
-        $("#logbtn").click(function() {
+        /*$("#logbtn").click(function() {
             $('#login').submit();
-        });
+        });*/
 
         $('.successbox').hide();//Hide the div
         $('.warningbox').hide();
@@ -36,7 +36,7 @@
 
     <div id="newcampform">
 
-        <?php echo form_open(site_url('login/login_check'),array('name'=>'login','id'=>'login', 'class'=>'signup'));?>
+        <?php echo form_open(site_url('login/login_check'),array('name'=>'signin','id'=>'signin', 'class'=>'signup'));?>
 
         <div>
             <label>Mobile Number</label>
@@ -48,6 +48,7 @@
         </div>
 
             <!--<a href="javascript:void(0)" id="logbtn" class="registerbtn">Sign in</a>-->
+            <!--<button class="tablebtn">Sign in</button>-->
             <input type="submit" class="registerbtn" value="Sign in">
 
         <?php echo form_close();?>

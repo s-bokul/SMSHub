@@ -5,7 +5,7 @@
         <li><a class="tel">01717579731</a></li>
         <li><a class="credit">45 Credits</a></li>
         <li><a class="purchasebtn" href="purchase.html">Purchase</a></li>
-        <li><a href="login/logout">Logout</a></li>
+        <li><a href="/login/logout">Logout</a></li>
     </ul>
 
 </div>
@@ -30,7 +30,7 @@
             </ul>
         </li>
         <li><a href="history.html">History</a></li>
-        <li><a href="accountdetails.html">Settings</a></li>
+        <li><a href="/userpanel/account_details">Settings</a></li>
     </ul>
 
 </div>

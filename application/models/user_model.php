@@ -47,7 +47,7 @@ class User_model extends CI_Model{
         if($query->num_rows() > 0)
         {
             $result = $query->result_array();
-            $this->session->set_userdata('user_info', $result);
+            $this->session->set_userdata('user_info', $result[0]);
             $status = true;
         }
 
