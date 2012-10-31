@@ -11,7 +11,7 @@ class User_model extends CI_Model{
 	
 	public function create($params){
         $status = false;
-        $params['password'] = md5('123456');
+        $params['password'] = md5($params['password']);
         $this->db->set($params);
         if($this->db->insert('smshub_users'))
 		$status = true;

@@ -46,9 +46,27 @@ class Register extends My_Controller {
             else
             {
                 //$this->load->view('formsuccess');
+                $data['password'] = rand(100000,999999);
+                /*
+                              * Include SMPP Config File
+                              */
+
+                include(APPPATH.'config/smpp'.EXT);
                 $this->load->model('user_model');
                 if($this->user_model->create($data))
                 {
+                    $message = "Thanks for join with us. Your password is :".$data['password'];
+
+                    $this->load->library('smpp');
+
+                    $this->smpp->debug= 0;
+
+                    $this->smpp->open($smpp['host'], $smpp['port'], $smpp['system_id'], $smpp['password']);
+
+                    $this->smpp->send_long($smpp['src'], $data['mobile_number'], $message);
+
+                    $this->smpp->close();
+
                     $msg = array(
                         'status' => true,
                         'class' => 'successbox',
