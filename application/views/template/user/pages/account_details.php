@@ -9,10 +9,17 @@
 <?php echo form_open(site_url('/userpanel/update_details'),array('name'=>'update','id'=>'update', 'class'=>'signup'));?>
 
 <table class="usersettingtable">
+ <?php
+            $message = json_decode($this->session->flashdata('msg'), 1);
+            echo '<div class="'.$message['class'].'" style="padding-left:200px;" > '.$message['msg'].' </div>';
+				
+        ?>
     <tr>
         <td>Email Address<span class="req">*</span></td>
         <td class="leftalign">
             <input type="text" name="email" id="email" value="<?php echo $data['email']; ?>">
+			<input type="hidden" name="user_id" id="user_id" value="<?php echo $data['user_id']; ?>">
+			
         </td>
     </tr>
     <tr>

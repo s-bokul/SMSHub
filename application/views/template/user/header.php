@@ -1,8 +1,8 @@
 <div id="header">
     <h1 id="logo"><a href="#"><img src="images/logo.jpg" alt=""></a></h1>
     <ul id="usernav">
-        <li><a>Welcome Jalal</a></li>
-        <li><a class="tel">01717579731</a></li>
+        <li><a>Welcome <?php $user_info = $this->session->userdata('user_info'); echo $user_info['first_name'];?></a></li>
+        <li><a class="tel"><?php  echo $user_info['mobile_number'];?></a></li>
         <li><a class="credit">45 Credits</a></li>
         <li><a class="purchasebtn" href="purchase.html">Purchase</a></li>
         <li><a href="/login/logout">Logout</a></li>

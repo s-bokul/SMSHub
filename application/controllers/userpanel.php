@@ -27,13 +27,49 @@ class Userpanel extends User_Controller {
         //$data = null;
         $error = null;
         $title = 'Account Details';
-        $data = $this->session->userdata('user_info');
-        /*echo '<pre>';
-        print_r($data);
-        echo '</pre>';*/
-        $this->template->write_view('content','template/user/pages/account_details',array('data'=>$data,'error'=>$error,'title'=>$title));
+        $user_info = $this->session->userdata('user_info');
+		$user_id=$user_info['user_id'];
+		$this->load->model('user_panelmodel');
+		$data=$this->user_panelmodel->user_data($user_id);
+		$this->template->write_view('content','template/user/pages/account_details',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
         $this->output->enable_profiler(TRUE);
     }
+	public function update_details()
+	{
+	  $this->load->helper('form');
+	  $error = null;
+      $title = 'Account Details Update';
+      $data = $this->input->post();
+	  $this->load->model('user_panelmodel');
+     if($this->user_panelmodel->user_update($data))
+	{
+		   $msg = array(
+                        'status' => true,
+                        'class' => 'successbox',
+                        'msg' => 'Account Details Update successfully.'
+                    );
+
+                    $data = json_encode($msg);
+
+                    $this->session->set_flashdata('msg', $data);
+	}
+	 else
+                {
+                    $msg = array(
+                        'status' => false,
+                        'class' => 'errormsgbox',
+                        'msg' => 'Account Details Update failed please try again.'
+                    );
+
+                    $data = json_encode($msg);
+
+                    $this->session->set_flashdata('msg', $data);
+				}
+	
+	 redirect('userpanel/account_details');
+	  
+	 
+	}
 
 }
