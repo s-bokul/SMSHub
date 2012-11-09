@@ -47,7 +47,7 @@ class Userpanel extends User_Controller {
 		   $msg = array(
                         'status' => true,
                         'class' => 'successbox',
-                        'msg' => 'Account Details Update successfully.'
+                        'msg' => 'Account Details Update Successfully.'
                     );
 
                     $data = json_encode($msg);
@@ -59,7 +59,7 @@ class Userpanel extends User_Controller {
                     $msg = array(
                         'status' => false,
                         'class' => 'errormsgbox',
-                        'msg' => 'Account Details Update failed please try again.'
+                        'msg' => 'Account Details Update Failed please try again.'
                     );
 
                     $data = json_encode($msg);
