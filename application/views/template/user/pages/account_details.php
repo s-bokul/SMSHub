@@ -1,10 +1,10 @@
 <!-- #BeginEditable "body" -->
 
 <ul class="tab settingpage">
-    <li><a class="selected" href="#">Account Details</a></li>
-    <li><a href="changepassword.html">Password</a></li>
-    <li><a href="senderid.html">Sender ID's</a></li>
-    <li><a href="settinginterface.html">Interface</a></li>
+	    <li><a href="/userpanel/account_details">Account Details</a></li>
+		<li><a href="/userpanel/changepassword">Password</a></li>
+		<li><a href="/userpanel/sender">Sender ID's</a></li>
+		<li><a class="selected" href="/userpanel/setting_interface">Interface</a></li>
 </ul>
 <?php echo form_open(site_url('/userpanel/update_details'),array('name'=>'update','id'=>'update', 'class'=>'signup'));?>
 
