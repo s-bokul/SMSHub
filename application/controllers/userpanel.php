@@ -146,7 +146,7 @@ class Userpanel extends User_Controller {
 		$user_id=$userinfo['user_id'];
 		$this->load->model('user_panelmodel');
 	
-		if($this->input->post('password') || $this->input->post('old_password')){
+		if($this->input->post('password') && $this->input->post('old_password')){
 		if($this->user_panelmodel->check_old_password($user_id,$old_password))
 		{   
 			
