@@ -16,7 +16,13 @@ class User_contactmodel extends CI_Model{
 		$status = true;
         return $status;
 	}
-
+  public function customfield_create($params){
+        $status = false;
+        $this->db->set($params);
+        if($this->db->insert('smshub_customfield'))
+		$status = true;
+        return $status;
+	}
 	
 	
 }
