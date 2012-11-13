@@ -120,6 +120,17 @@ class User_panelmodel extends CI_Model
         return $truefalse;
     }
 
+    public function get_group_details($user_id)
+    {
+        $this->db->select('id, group_name');
+        $this->db->where('status', '1');
+        $this->db->where('user_id', $user_id);
+        $query = $this->db->get('smshub_groups');
+        $result = $query->result_array();
+        //$this->db->last_query();
+        return $result;
+    }
+
 }
 
 
