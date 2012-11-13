@@ -1,3 +1,22 @@
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#group_id').change(function () {
+            $.get("/userpanel", {
+                group_id:$('#group_id').val()
+            }, function (response) {
+                writeMobile('numbers', response);
+            });
+            return false;
+        });
+    });
+
+    function writeMobile(id, response) {
+        $('#'+ id).val($('#'+id).val() + response);
+        //$('#' + id).attr('value',unescape(response));
+    }
+
+</script>
 <!-- #BeginEditable "body" -->
 
 <ul class="tab">
@@ -29,24 +48,24 @@
             <a>Registered Sender Identification</a>
 
             <ul>
-                <li><input type="radio" name="id">
-                    <label>Tareq</label>
-                </li>
-                <li><input type="radio" name="id">
-                    <label>Jalal</label>
-                </li>
-                <li><input type="radio" name="id">
-                    <label>Nibir</label>
-                </li>
-                <li><input type="radio" name="id">
-                    <label>Mizan</label>
-                </li>
-                <li><input type="radio" name="id">
-                    <label>Progga</label>
-                </li>
+                <?php
+
+                    $count = count($data['sender_ids']);
+                    for ($i = 0; $i < $count; ++$i)
+                    {
+                        echo '<li><input type="radio" name="sender_id" value="'.$data['sender_ids'][$i]['sender_number'].'"';
+
+                        if($data['sender_ids'][$i]['sender_status'] == 1)
+                            echo 'checked="checked"';
+                        echo '><label>'.$data['sender_ids'][$i]['sender_number'].'</label></li>';
+                    }
+
+                ?>
+
                 <li><strong>Custom Sender ID's</strong></li>
-                <li><input type="radio" name="id">
-                    <input type="text">
+                <li>
+                    <input type="radio" name="sender_id" value="CusSenderID" >
+                    <input type="text" name="custom_name">
                 </li>
 
             </ul>
@@ -56,8 +75,8 @@
         <div>
             <h3>Add Contacts</h3>
             <label>Add numbers from list</label>
-            <select name="group_name" id="group_name">
-
+            <select name="group_id" id="group_id">
+                <option value="" selected="">--Select List--</option>
             <?php
                 $count = count($data['group_details']);
                 for ($i = 0; $i < $count; ++$i)
@@ -69,13 +88,13 @@
             <br>
             <br>
             <label>Input numbers</label>
-            <textarea></textarea>
+            <textarea name="numbers" id="numbers"></textarea>
             <p>Please enter the mobile numbers in international format. For example, 0415284887 will need to be entered as 61415284887. If you are entering more than 1 mobile number manually please separate the numbers by a comma ",". E.g. 61415284887,61415284321.</p>
             <br>
-            <label>Add Numbers from file</label>
+            <!--<label>Add Numbers from file</label>
             <p><a href="#">Download txt template</a><a href="#">Download csv template</a></p>
             <input type="file"><input type="button" value="Upload"><br>
-            <a>(Maximum file size 512kb)</a>
+            <a>(Maximum file size 512kb)</a>-->
         </div>
 
         <div>

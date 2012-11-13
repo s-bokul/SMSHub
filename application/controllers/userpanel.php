@@ -336,10 +336,35 @@ class Userpanel extends User_Controller
         $user_info = $this->session->userdata('user_info');
         $user_id=$user_info['user_id'];
 
+        $data['sender_ids'] = $this->user_panelmodel->get_sender_ids($user_id);
         $data['group_details'] = $this->user_panelmodel->get_group_details($user_id);
+
+        //print_r($data['sender_ids']);
 
         $this->template->write_view('content', 'template/user/pages/new_campaign', array('data' => $data, 'error' => $error, 'title' => $title));
         $this->template->render();
     }
 
+    public function getNumberList($group_id)
+    {
+        $this->load->model('user_panelmodel');
+        $number_list = $this->user_panelmodel->getNumberList($group_id);
+        return $number_list;
+    }
+
+}
+
+if(isset($_GET['group_id']))
+{
+    $Userpanel = new Userpanel();
+    $numbers = $Userpanel->getNumberList($_GET['group_id']);
+
+    $number_string = null;
+    foreach($numbers as $number_array)
+    {
+        foreach($number_array as $number)
+            $number_string .= $number.',';
+    }
+    echo $number_string;
+    die();
 }

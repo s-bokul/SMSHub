@@ -13,7 +13,7 @@
 <div id="headnavcontainer">
 
     <ul id="headnav">
-        <li><a href="userpanel.html" class="selected">Campaign</a></li>
+        <li><a href="/userpanel" class="selected">Campaign</a></li>
         <li><a href="userInbox.html">Inbox</a></li>
         <li><a href="#">Contacts</a>
             <ul>
