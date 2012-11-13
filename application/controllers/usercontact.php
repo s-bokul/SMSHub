@@ -39,7 +39,7 @@ class Usercontact extends User_Controller {
 		
         $data = null;
         $error = null;
-        $title = 'Contact Add';
+        $title = 'Contact List Add';
 		
 		$this->template->write_view('content','template/user/pages/createlist',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
@@ -129,6 +129,22 @@ class Usercontact extends User_Controller {
         $this->session->set_flashdata('msg', $data);
         }
        redirect('usercontact/addcustomfield');
+    }
+	public function addcontact()
+    {
+        //$this->load->view('welcome_message');
+        $this->load->helper('form');
+		
+        $data = null;
+        $error = null;
+        $title = 'Contact Add';
+	    $user_info = $this->session->userdata('user_info');
+	    $user_id=$user_info['user_id'];
+		$this->load->model('user_contactmodel');
+		$data['contact_list']=$this->user_contactmodel->show_contactlist($user_id);
+		$data['custom_field']=$this->user_contactmodel->show_customfiled($user_id);
+		$this->template->write_view('content','template/user/pages/addcontact',array('data'=>$data,'error'=>$error,'title'=>$title));
+        $this->template->render();
     }
 
 }

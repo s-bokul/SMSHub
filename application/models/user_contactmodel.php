@@ -23,6 +23,26 @@ class User_contactmodel extends CI_Model{
 		$status = true;
         return $status;
 	}
+ public function show_contactlist($user_id)
+    {
+        $this->db->from('smshub_contactlist');
+        $this->db->where('user_id', $user_id);
+        $this->db->order_by("contactlist_id", "Asc");
+        $query = $this->db->get();
+        //print_r($query->result());
+        //die(0);
+        return $query->result();
+    }
+public function show_customfiled($user_id)
+    {
+        $this->db->from('smshub_customfield');
+        $this->db->where('user_id', $user_id);
+        $this->db->order_by("customfield_id", "Asc");
+        $query = $this->db->get();
+        //print_r($query->result());
+        //die(0);
+        return $query->result();
+    }
 	
 	
 }

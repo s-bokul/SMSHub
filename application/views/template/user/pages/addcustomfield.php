@@ -12,11 +12,11 @@
 		</tr>
 		<tr>
 			<td style="width:100px">Field Name</td>
-			<td><input type="text"></td>
+			<td><input type="text" name="customfield_name" id="customfield_name"></td>
 		</tr>
 		<tr>
 			<td>Description</td>
-			<td><textarea></textarea></td>
+			<td><textarea name="customfield_description" id="customfield_description"></textarea></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
