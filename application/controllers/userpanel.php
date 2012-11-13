@@ -127,67 +127,8 @@ class Userpanel extends User_Controller
         $title = 'Change Password';
         $this->template->write_view('content', 'template/user/pages/changepassword', array('data' => $data, 'error' => $error, 'title' => $title));
         $this->template->render();
-<<<<<<< HEAD
+ }
 	  
-	  }
-	  
-	  function changepass()
-	{   
-		$this->data=$_POST;
-		
-		$password_data = array(
-		'old_password'=>md5($this->input->post('old_password')),
-		'password'=>md5($this->input->post('password')),
-		'confirm_password'=>md5($this->input->post('confirm_password'))
-		);
-		
-		$old_password=$password_data["old_password"];
-		$user_password=$password_data["password"];
-		$confirm_password=$password_data["confirm_password"];
-		
-		$userinfo=$this->session->userdata('user_info');
-		$user_id=$userinfo['user_id'];
-		$this->load->model('user_panelmodel');
-	
-		if($this->input->post('password') && $this->input->post('old_password')){
-		if($this->user_panelmodel->check_old_password($user_id,$old_password))
-		{   
-			
-			if($user_password==$confirm_password)
-			{
-				if($this->user_panelmodel->update_password($user_id,$password_data))
-				{
-					
-					$msg = array(
-                        'status' => true,
-                        'class' => 'successbox',
-                        'msg' => 'Password Changed Successfully.'
-                    );
-                   $data = json_encode($msg);
-                   $this->session->set_flashdata('msg', $data);
-				}
-				else
-				{
-					$msg = array(
-                        'status' => true,
-                        'class' => 'errormsgbox',
-                        'msg' => 'There was some problem please try again.'
-                    );
-                   $data = json_encode($msg);
-                   $this->session->set_flashdata('msg', $data);
-					
-				}
-				
-			}
-			
-			
-			else
-			{
-				
-				$msg = array(
-=======
-
-    }
 
     function changepass()
     {
@@ -240,7 +181,6 @@ class Userpanel extends User_Controller
                 {
 
                     $msg = array(
->>>>>>> ee5b2a2f9ae0b0804097fccf6dcd2998e708b5f9
                         'status' => true,
                         'class' => 'errormsgbox',
                         'msg' => 'Please Type Same Password!'
