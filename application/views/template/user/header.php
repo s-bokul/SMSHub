@@ -26,7 +26,7 @@
                 <li><a href="suppresscontact.html">Supression Contacts</a></li>
                 <li><a href="transformnumbers.html">Transform Numbers</a></li>
                 <li><a href="customfield.html">Custom Fields</a></li>
-                <li><a href="addcustomfield.html">Add cutom fields</a></li>
+                <li><a href="/usercontact/addcustomfield">Add cutom fields</a></li>
             </ul>
         </li>
         <li><a href="history.html">History</a></li>

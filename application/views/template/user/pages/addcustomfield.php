@@ -1,5 +1,6 @@
 <!-- #BeginEditable "body" -->
-<?php echo form_open(site_url('/usercontact/addlist'),array('name'=>'createlist','id'=>'createlist'));?>
+
+<?php echo form_open(site_url('/usercontact/createcustomfield'),array('name'=>'createcustomfield','id'=>'createcustomfield'));?>
 	<table class="importcontact">
 	<?php
             $message = json_decode($this->session->flashdata('msg'), 1);
@@ -10,8 +11,12 @@
 			<th class="leftalign" colspan="2">Add Custom Field</th>
 		</tr>
 		<tr>
-			<td style="width:100px">Name</td>
-			<td><input type="text" name="contactlist_name" id="contactlist_name"></td>
+			<td style="width:100px">Field Name</td>
+			<td><input type="text"></td>
+		</tr>
+		<tr>
+			<td>Description</td>
+			<td><textarea></textarea></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
@@ -19,4 +24,8 @@
 		</tr>
 	</table>
 <?php echo form_close();?>
+
+
+	
+
 <!-- #EndEditable -->
