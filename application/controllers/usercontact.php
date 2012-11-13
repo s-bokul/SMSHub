@@ -64,7 +64,7 @@ class Usercontact extends User_Controller {
 	 
 	  $user_info = $this->session->userdata('user_info');
 	  $data['user_id']=$user_info['user_id'];
-	  $datestring = "%Y/%m/%d  %h:%i:%s %a";
+	  $datestring = "%Y/%m/%d  %h:%i:%s";
 	  $data['create_date'] = mdate($datestring);
 	  $this->load->model('user_contactmodel');
 	  
