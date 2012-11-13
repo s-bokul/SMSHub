@@ -146,5 +146,55 @@ class Usercontact extends User_Controller {
 		$this->template->write_view('content','template/user/pages/addcontact',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
     }
+ public function createcontact()
+    {
+        //$this->load->view('welcome_message');
+  	  $this->load->helper('form');
+	  $this->load->helper('date');
+	  $error = null;
+      $title = 'Contact Add';
+      $count=$this->input->post('count_number');
+	  $data['group_id']=$this->input->post('group_id');
+	  $data['firstname']=$this->input->post('firstname');
+	  $data['lastname']=$this->input->post('lastname');
+	  $data['number']=$this->input->post('number');
+	  for($i=0;$i<=$count; $i++){
+	  $data['dynamic_data'][$i] = array(
+                        'fieldname' => $this->input->post('customfield'.$i),
+                        'value' => $this->input->post('customfield_value'.$i),
+                        );
+	  }
+	 
+	
+	  $data['dynamic_data']=json_encode($data['dynamic_data']);
+	  $user_info = $this->session->userdata('user_info');
+	  $data['user_id']=$user_info['user_id'];
+	  $datestring = "%Y/%m/%d  %h:%i:%s";
+	  $data['date_created'] = mdate($datestring);
+	  $this->load->model('user_contactmodel');
+	  
+	if($this->user_contactmodel->contact_create($data)){
+		   $msg = array(
+                        'status' => true,
+                        'class' => 'successbox',
+                        'msg' => 'Contact   Added successfully.'
+                    );
+
+        $data = json_encode($msg);
+        $this->session->set_flashdata('msg', $data);
+	  }	
+	  else
+	  {
+        $msg = array(
+                        'status' => false,
+                        'class' => 'errormsgbox',
+                        'msg' => 'Contact    Added Fail.'
+                    );
+
+        $data = json_encode($msg);
+        $this->session->set_flashdata('msg', $data);
+        }
+       redirect('usercontact/addcontact');
+    }
 
 }

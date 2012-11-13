@@ -12,7 +12,7 @@ class User_contactmodel extends CI_Model{
   public function contactlist_create($params){
         $status = false;
         $this->db->set($params);
-        if($this->db->insert('smshub_contactlist'))
+        if($this->db->insert('smshub_groups'))
 		$status = true;
         return $status;
 	}
@@ -25,9 +25,9 @@ class User_contactmodel extends CI_Model{
 	}
  public function show_contactlist($user_id)
     {
-        $this->db->from('smshub_contactlist');
+        $this->db->from('smshub_groups');
         $this->db->where('user_id', $user_id);
-        $this->db->order_by("contactlist_id", "Asc");
+        $this->db->order_by("id", "Asc");
         $query = $this->db->get();
         //print_r($query->result());
         //die(0);
@@ -43,6 +43,13 @@ public function show_customfiled($user_id)
         //die(0);
         return $query->result();
     }
+	 public function contact_create($params){
+        $status = false;
+        $this->db->set($params);
+        if($this->db->insert('smshub_contacts'))
+		$status = true;
+        return $status;
+	}
 	
 	
 }

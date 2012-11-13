@@ -11,7 +11,7 @@
 		</tr>
 		<tr>
 			<td style="width:100px">Name</td>
-			<td><input type="text" name="contactlist_name" id="contactlist_name"></td>
+			<td><input type="text" name="group_name" id="group_name"></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
