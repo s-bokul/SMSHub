@@ -127,8 +127,8 @@ class Userpanel extends User_Controller
         $title = 'Change Password';
         $this->template->write_view('content', 'template/user/pages/changepassword', array('data' => $data, 'error' => $error, 'title' => $title));
         $this->template->render();
-
-    }
+ }
+	  
 
     function changepass()
     {
