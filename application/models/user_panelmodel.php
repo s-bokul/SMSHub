@@ -131,6 +131,26 @@ class User_panelmodel extends CI_Model
         return $result;
     }
 
+    public function get_sender_ids($user_id)
+    {
+        $this->db->select('sender_number, sender_status');
+        $this->db->where('user_id', $user_id);
+        $query = $this->db->get('smshub_sender');
+        $result = $query->result_array();
+        //$this->db->last_query();
+        return $result;
+    }
+
+    public function getNumberList($group_id)
+    {
+        $this->db->select('number');
+        $this->db->where('group_id', $group_id);
+        $query = $this->db->get('smshub_contacts');
+        $result = $query->result_array();
+        //$this->db->last_query();
+        return $result;
+    }
+
 }
 
 
