@@ -326,4 +326,20 @@ class Userpanel extends User_Controller
         redirect('userpanel/sender');
     }
 
+    public function new_campaign()
+    {
+        $error = null;
+        $title = 'Start New Campaign';
+        $data = null;
+        $this->load->model('user_panelmodel');
+
+        $user_info = $this->session->userdata('user_info');
+        $user_id=$user_info['user_id'];
+
+        $data['group_details'] = $this->user_panelmodel->get_group_details($user_id);
+
+        $this->template->write_view('content', 'template/user/pages/new_campaign', array('data' => $data, 'error' => $error, 'title' => $title));
+        $this->template->render();
+    }
+
 }

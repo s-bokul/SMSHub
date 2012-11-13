@@ -3,7 +3,7 @@
 <ul class="tab">
     <li><a class="selected" href="#">Saved Campaign</a></li>
     <li><a href="#">Scheduled Campaign</a></li>
-    <li><a id="newcamp" href="newcampaign.html">Start New Campaign</a></li>
+    <li><a id="newcamp" href="/userpanel/new_campaign">Start New Campaign</a></li>
 </ul>
 
 <table class="defaulttable">
