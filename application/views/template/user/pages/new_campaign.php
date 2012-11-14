@@ -1,5 +1,5 @@
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.validate.js"></script>
 <script type="text/javascript">
-
     $(document).ready(function () {
         $('#group_id').change(function () {
             $.get("/userpanel", {
@@ -9,12 +9,32 @@
             });
             return false;
         });
+
+        $("#campaign_form").validate({
+            rules: {
+                campaign_name: {required:true},
+                message: { required:true },
+                sender_id: { required:true },
+                numbers: { required:true }
+            }
+        });
+
+        $('.successbox').hide();//Hide the div
+        $('.warningbox').hide();
+        $('.errormsgbox').hide();
+
+        $(".successbox").fadeIn(2000); //Add a fade in effect that will last for 2000 millisecond
+        $(".warningbox").fadeIn(2000);
+        $(".errormsgbox").fadeIn(2000);
+
     });
 
     function writeMobile(id, response) {
         $('#'+ id).val($('#'+id).val() + response);
         //$('#' + id).attr('value',unescape(response));
     }
+
+
 
 </script>
 <!-- #BeginEditable "body" -->
@@ -24,21 +44,24 @@
     <li><a href="#">Scheduled Campaign</a></li>
     <li><a id="newcamp" href="/userpanel/new_campaign">Start New Campaign</a></li>
 </ul>
-
+<?php
+    $message = json_decode($this->session->flashdata('msg'), 1);
+    echo '<div class="'.$message['class'].'" > '.$message['msg'].' </div>';
+?>
 <div id="newcampform">
-    <form>
+    <form id="campaign_form" name="campaign_form" method="post" action="/userpanel/new_campaign_save">
         <div>
             <label>Campaign Name</label>
-            <input type="text">
+            <input type="text" id="campaign_name" name="campaign_name">
             <br>
             <label>Campaign Description</label>
-            <input type="text">
+            <input type="text" id="campaign_description" name="campaign_description">
         </div>
 
         <div>
             <h3>Specify Message</h3>
             <p>Personalise your message by using these <a href="#">custom fields</a>. It will be replaced with its associated value when the message is sent.To see your available custom fields click  <a href="#">here</a>. Remember, Custom fields only works for your imported contact.</p>
-            <textarea></textarea>
+            <textarea name="message" id="message"></textarea>
             <p>Character Count: 0 (1 part)<br>
                 (1 SMS = 153 characters, 2 SMS = 306 characters, ....)</p>
         </div>
@@ -99,19 +122,24 @@
 
         <div>
             <h3>Schedule Delivery</h3>
-            <select>
-                <option>Now</option>
-                <option>Date</option>
-                <option>Date</option>
-                <option>Date</option>
-                <option>Date</option>
-                <option>Date</option>
-                <option>Date</option>
+
+            <select id="delivery_time" name="delivery_time">
+                <?php
+                    $i = 0;
+                    foreach( range(0,15) as $cnt ){
+                        $date = strtoupper( date('Y-m-d',strtotime( "today + $cnt day") ) ) . PHP_EOL;
+                        if($i == 0)
+                            echo '<option value="'.$date.'">Now</option>';
+                        else
+                            echo '<option value="'.$date.'">'.$date.'</option>';
+                        ++$i;
+                    }
+                ?>
             </select>
         </div>
 
         <div>
-            <input class="sendnowbtn" type="submit" value="Send Now"> &nbsp;<input class="suplist" type="submit" value="Save"><input class="suplist" type="submit" value="Cancel">
+            <input class="sendnowbtn" type="submit" value="Send"> &nbsp;<!--<input class="suplist" type="submit" value="Save">--><input class="suplist" type="submit" value="Cancel">
         </div>
 
     </form>

@@ -49,7 +49,7 @@
     <div>
         <?php
             $message = json_decode($this->session->flashdata('msg'), 1);
-            echo '<div class="'.$message['class'].'" > '.$message['msg'].' </div>'
+            echo '<div class="'.$message['class'].'" > '.$message['msg'].' </div>';
         ?>
         <?php echo validation_errors('<div class="error">', '</div>'); ?>
         <!--<div class="successbox" > This is a success message Box </div>

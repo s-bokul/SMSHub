@@ -345,6 +345,74 @@ class Userpanel extends User_Controller
         $this->template->render();
     }
 
+    public function new_campaign_save()
+    {
+        $error = null;
+        $title = 'Start New Campaign';
+
+        $user_info = $this->session->userdata('user_info');
+        $user_id=$user_info['user_id'];
+
+        $data = $this->input->post();
+        $numbers = $data['numbers'];
+
+        $data['user_id'] = $user_id;
+        unset($data['numbers']);
+        if($data['sender_id'] == 'CusSenderID')
+        {
+            $data['sender_id'] = $data['custom_name'];
+        }
+        unset($data['custom_name']);
+        unset($data['group_id']);
+
+        /*echo '<pre>';
+        print_r($data);
+        die();*/
+        $this->load->model('user_model');
+
+        if ($campaign_id = $this->user_model->create_campaign($data)) {
+            if($this->user_model->save_campaign_numbers($numbers, $campaign_id))
+            {
+                $msg = array(
+                    'status' => true,
+                    'class' => 'successbox',
+                    'msg' => 'Campaign Created Successfully.'
+                );
+
+                $data = json_encode($msg);
+
+                $this->session->set_flashdata('msg', $data);
+            }
+            else
+            {
+                $msg = array(
+                    'status' => false,
+                    'class' => 'errormsgbox',
+                    'msg' => 'Campaign Creation Failed. please try again.'
+                );
+
+                $data = json_encode($msg);
+
+                $this->session->set_flashdata('msg', $data);
+            }
+
+        }
+        else
+        {
+            $msg = array(
+                'status' => false,
+                'class' => 'errormsgbox',
+                'msg' => 'Campaign Creation Failed. please try again.'
+            );
+
+            $data = json_encode($msg);
+
+            $this->session->set_flashdata('msg', $data);
+        }
+
+        redirect('userpanel/new_campaign');
+    }
+
     public function getNumberList($group_id)
     {
         $this->load->model('user_panelmodel');

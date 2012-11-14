@@ -54,6 +54,35 @@ class User_model extends CI_Model{
         return $status;
     }
 
+    public function create_campaign($params)
+    {
+        $status = true;
+        $this->db->set($params);
+        if($this->db->insert('smshub_campaign'))
+            $status = $this->db->insert_id();
+        return $status;
+    }
+
+    public function save_campaign_numbers($numbers, $campaign_id)
+    {
+        $numbers = explode(',', $numbers);
+        //print_r($numbers);
+        foreach($numbers as $number)
+        {
+            if(!empty($number))
+            {
+                $data = array(
+                    'campaign_id' => $campaign_id,
+                    'number' => $number
+                );
+                $this->db->set($data);
+                $this->db->insert('smshub_sending_numbers');
+                unset($data);
+            }
+        }
+        return true;
+    }
+
 }
 
 
