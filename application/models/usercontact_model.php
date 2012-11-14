@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 
 
-class User_contactmodel extends CI_Model{
+class Usercontact_model extends CI_Model{
 
 	protected $errors;
 

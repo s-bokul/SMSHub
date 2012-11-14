@@ -31,8 +31,8 @@ class Userpanel extends User_Controller
         $title = 'Account Details';
         $user_info = $this->session->userdata('user_info');
         $user_id = $user_info['user_id'];
-        $this->load->model('user_panelmodel');
-        $data = $this->user_panelmodel->user_data($user_id);
+        $this->load->model('userpanel_model');
+        $data = $this->userpanel_model->user_data($user_id);
         $this->template->write_view('content', 'template/user/pages/account_details', array('data' => $data, 'error' => $error, 'title' => $title));
         $this->template->render();
         //$this->output->enable_profiler(TRUE);
@@ -93,8 +93,8 @@ class Userpanel extends User_Controller
         $data = $this->input->post();
         $user_info = $this->session->userdata('user_info');
         $data['user_id'] = $user_info['user_id'];
-        $this->load->model('user_panelmodel');
-        if ($this->user_panelmodel->create_interface($data)) {
+        $this->load->model('userpanel_model');
+        if ($this->userpanel_model->create_interface($data)) {
             $msg = array(
                 'status' => true,
                 'class' => 'successbox',
@@ -146,13 +146,13 @@ class Userpanel extends User_Controller
 
         $userinfo = $this->session->userdata('user_info');
         $user_id = $userinfo['user_id'];
-        $this->load->model('user_panelmodel');
+        $this->load->model('userpanel_model');
 
         if ($this->input->post('password') || $this->input->post('old_password')) {
-            if ($this->user_panelmodel->check_old_password($user_id, $old_password)) {
+            if ($this->userpanel_model->check_old_password($user_id, $old_password)) {
 
                 if ($user_password == $confirm_password) {
-                    if ($this->user_panelmodel->update_password($user_id, $password_data)) {
+                    if ($this->userpanel_model->update_password($user_id, $password_data)) {
 
                         $msg = array(
                             'status' => true,
@@ -221,8 +221,8 @@ class Userpanel extends User_Controller
         $title = 'Sender Add';
         $user_info = $this->session->userdata('user_info');
         $user_id = $user_info['user_id'];
-        $this->load->model('user_panelmodel');
-        $sender_data = $this->user_panelmodel->show_senderdata($user_id);
+        $this->load->model('userpanel_model');
+        $sender_data = $this->userpanel_model->show_senderdata($user_id);
         $this->template->write_view('content', 'template/user/pages/sender', array('sender_data' => $sender_data, 'error' => $error, 'title' => $title));
         $this->template->render();
 
@@ -236,9 +236,9 @@ class Userpanel extends User_Controller
         $data = $this->input->post();
         $user_info = $this->session->userdata('user_info');
         $data['user_id'] = $user_info['user_id'];
-        $this->load->model('user_panelmodel');
+        $this->load->model('userpanel_model');
 
-        if ($this->user_panelmodel->sender_create($data)) {
+        if ($this->userpanel_model->sender_create($data)) {
             $msg = array(
                 'status' => true,
                 'class' => 'successbox',
@@ -269,9 +269,9 @@ class Userpanel extends User_Controller
         $this->load->helper('form');
         //$user_info = $this->session->userdata('user_info');
         //$user_id=$user_info['user_id'];
-        $this->load->model('user_panelmodel');
+        $this->load->model('userpanel_model');
 
-        if ($this->user_panelmodel->senderdata_delete($sender_id)) {
+        if ($this->userpanel_model->senderdata_delete($sender_id)) {
             $msg = array(
                 'status' => true,
                 'class' => 'successbox',
@@ -300,9 +300,9 @@ class Userpanel extends User_Controller
         $this->load->helper('form');
         //$user_info = $this->session->userdata('user_info');
         //$user_id=$user_info['user_id'];
-        $this->load->model('user_panelmodel');
+        $this->load->model('userpanel_model');
 
-        if ($this->user_panelmodel->senderdata_update($sender_id)) {
+        if ($this->userpanel_model->senderdata_update($sender_id)) {
             $msg = array(
                 'status' => true,
                 'class' => 'successbox',
@@ -331,13 +331,13 @@ class Userpanel extends User_Controller
         $error = null;
         $title = 'Start New Campaign';
         $data = null;
-        $this->load->model('user_panelmodel');
+        $this->load->model('userpanel_model');
 
         $user_info = $this->session->userdata('user_info');
         $user_id=$user_info['user_id'];
 
-        $data['sender_ids'] = $this->user_panelmodel->get_sender_ids($user_id);
-        $data['group_details'] = $this->user_panelmodel->get_group_details($user_id);
+        $data['sender_ids'] = $this->userpanel_model->get_sender_ids($user_id);
+        $data['group_details'] = $this->userpanel_model->get_group_details($user_id);
 
         //print_r($data['sender_ids']);
 
@@ -345,78 +345,10 @@ class Userpanel extends User_Controller
         $this->template->render();
     }
 
-    public function new_campaign_save()
-    {
-        $error = null;
-        $title = 'Start New Campaign';
-
-        $user_info = $this->session->userdata('user_info');
-        $user_id=$user_info['user_id'];
-
-        $data = $this->input->post();
-        $numbers = $data['numbers'];
-
-        $data['user_id'] = $user_id;
-        unset($data['numbers']);
-        if($data['sender_id'] == 'CusSenderID')
-        {
-            $data['sender_id'] = $data['custom_name'];
-        }
-        unset($data['custom_name']);
-        unset($data['group_id']);
-
-        /*echo '<pre>';
-        print_r($data);
-        die();*/
-        $this->load->model('user_model');
-
-        if ($campaign_id = $this->user_model->create_campaign($data)) {
-            if($this->user_model->save_campaign_numbers($numbers, $campaign_id))
-            {
-                $msg = array(
-                    'status' => true,
-                    'class' => 'successbox',
-                    'msg' => 'Campaign Created Successfully.'
-                );
-
-                $data = json_encode($msg);
-
-                $this->session->set_flashdata('msg', $data);
-            }
-            else
-            {
-                $msg = array(
-                    'status' => false,
-                    'class' => 'errormsgbox',
-                    'msg' => 'Campaign Creation Failed. please try again.'
-                );
-
-                $data = json_encode($msg);
-
-                $this->session->set_flashdata('msg', $data);
-            }
-
-        }
-        else
-        {
-            $msg = array(
-                'status' => false,
-                'class' => 'errormsgbox',
-                'msg' => 'Campaign Creation Failed. please try again.'
-            );
-
-            $data = json_encode($msg);
-
-            $this->session->set_flashdata('msg', $data);
-        }
-
-        redirect('userpanel/new_campaign');
-    }
-
     public function getNumberList($group_id)
     {
-        $this->load->model('user_panelmodel');
-        $number_list = $this->user_panelmodel->getNumberList($group_id);
+        $this->load->model('userpanel_model');
+        $number_list = $this->userpanel_model->getNumberList($group_id);
         return $number_list;
     }
 

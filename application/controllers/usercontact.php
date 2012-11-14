@@ -58,9 +58,9 @@ class Usercontact extends User_Controller {
 	  $data['user_id']=$user_info['user_id'];
 	  $datestring = "%Y/%m/%d  %h:%i:%s";
 	  $data['date_created'] = mdate($datestring);
-	  $this->load->model('user_contactmodel');
+	  $this->load->model('usercontact_model');
 	  
-	if($this->user_contactmodel->contactlist_create($data)){
+	if($this->usercontact_model->contactlist_create($data)){
 		   $msg = array(
                         'status' => true,
                         'class' => 'successbox',
@@ -105,9 +105,9 @@ class Usercontact extends User_Controller {
 	  $data['user_id']=$user_info['user_id'];
 	  $datestring = "%Y/%m/%d  %h:%i:%s";
 	  $data['date_created'] = mdate($datestring);
-	  $this->load->model('user_contactmodel');
+	  $this->load->model('usercontact_model');
 	  
-	if($this->user_contactmodel->customfield_create($data)){
+	if($this->usercontact_model->customfield_create($data)){
 		   $msg = array(
                         'status' => true,
                         'class' => 'successbox',
@@ -140,9 +140,9 @@ class Usercontact extends User_Controller {
         $title = 'Contact Add';
 	    $user_info = $this->session->userdata('user_info');
 	    $user_id=$user_info['user_id'];
-		$this->load->model('user_contactmodel');
-		$data['contact_list']=$this->user_contactmodel->show_contactlist($user_id);
-		$data['custom_field']=$this->user_contactmodel->show_customfiled($user_id);
+		$this->load->model('usercontact_model');
+		$data['contact_list']=$this->usercontact_model->show_contactlist($user_id);
+		$data['custom_field']=$this->usercontact_model->show_customfiled($user_id);
 		$this->template->write_view('content','template/user/pages/addcontact',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
     }
@@ -171,9 +171,9 @@ class Usercontact extends User_Controller {
 	  $data['user_id']=$user_info['user_id'];
 	  $datestring = "%Y/%m/%d  %h:%i:%s";
 	  $data['date_created'] = mdate($datestring);
-	  $this->load->model('user_contactmodel');
+	  $this->load->model('usercontact_model');
 	  
-	if($this->user_contactmodel->contact_create($data)){
+	if($this->usercontact_model->contact_create($data)){
 		   $msg = array(
                         'status' => true,
                         'class' => 'successbox',
