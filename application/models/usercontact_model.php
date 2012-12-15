@@ -33,7 +33,7 @@ class Usercontact_model extends CI_Model{
         //die(0);
         return $query->result();
     }
-public function show_customfiled($user_id)
+  public function show_customfiled($user_id)
     {
         $this->db->from('smshub_customfield');
         $this->db->where('user_id', $user_id);
@@ -50,7 +50,30 @@ public function show_customfiled($user_id)
 		$status = true;
         return $status;
 	}
-	
+	 public function delete_customfiled($customfied_id)
+    {
+      if($this->db->delete('smshub_customfield', array('customfield_id' => $customfied_id)))
+	  $status = true;
+      return $status;
+    }
+	 public function edit_customfiled($customfield_id)
+    {
+        $this->db->from('smshub_customfield');
+        $this->db->where('customfield_id', $customfield_id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+ public function customfield_update($params)
+    {
+        $status = false;
+        $this->db->set($params);
+
+        if ($this->db->update('smshub_customfield', $params, array('customfield_id' => $params['customfield_id']))) ;
+        $status = true;
+        return $status;
+    }
+
+
 	
 }
 

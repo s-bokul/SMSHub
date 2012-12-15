@@ -97,10 +97,23 @@ class Usercontact extends User_Controller {
     {
         //$this->load->view('welcome_message');
   	  $this->load->helper('form');
+	  $this->load->library('form_validation');
 	  $this->load->helper('date');
 	  $error = null;
       $title = 'Create custom field Add';
       $data = $this->input->post();
+	  if($data){
+	   $this->form_validation->set_rules('customfield_name', 'customfield_name', 'trim|required');
+       $this->form_validation->set_rules('customfield_description', 'customfield_description', 'required');
+	   if ($this->form_validation->run() == FALSE)
+            {
+                $data = null;
+                $error = validation_errors();
+                $title = 'Custom Field Create';
+                $this->template->write_view('content','template/user/pages/addcustomfield',array('data'=>$data,'error'=>$error,'title'=>$title));
+                $this->template->render();
+            }
+	 else{		
 	  $user_info = $this->session->userdata('user_info');
 	  $data['user_id']=$user_info['user_id'];
 	  $datestring = "%Y/%m/%d  %h:%i:%s";
@@ -128,7 +141,9 @@ class Usercontact extends User_Controller {
         $data = json_encode($msg);
         $this->session->set_flashdata('msg', $data);
         }
+	  }
        redirect('usercontact/addcustomfield');
+	     }
     }
 	public function addcontact()
     {
@@ -240,4 +255,94 @@ class Usercontact extends User_Controller {
         }
        redirect('usercontact/importcontact');
 	  }
+    public function customfield()
+    {
+        $this->load->helper('form');
+        $data = null;
+        $error = null;
+        $title = 'Custom fields';
+		$user_info = $this->session->userdata('user_info');
+	    $user_id=$user_info['user_id'];
+		$this->load->model('usercontact_model');
+		$data['custom_field']=$this->usercontact_model->show_customfiled($user_id);
+        $this->template->write_view('content','template/user/pages/customfields',array('data'=>$data,'error'=>$error,'title'=>$title));
+        $this->template->render();
+     }
+   	public function customfield_delete($customfied_id)
+    {
+        $this->load->helper('form');
+        $data = null;
+        $error = null;
+        $title = 'Custom fields';
+	    $this->load->model('usercontact_model');
+	  if($this->usercontact_model->delete_customfiled($customfied_id)){
+		   $msg = array(
+                        'status' => true,
+                        'class' => 'successbox',
+                        'msg' => 'Field delete successfully.'
+                    );
+
+        $data = json_encode($msg);
+        $this->session->set_flashdata('msg', $data);
+	    }	
+	  else
+	   {
+        $msg = array(
+                        'status' => false,
+                        'class' => 'errormsgbox',
+                        'msg' => 'Fail to delete field.'
+                    );
+
+        $data = json_encode($msg);
+        $this->session->set_flashdata('msg', $data);
+        }
+		redirect('usercontact/customfield');
+     }
+	public function customfield_edit($customfield_id)
+    {
+        $this->load->helper('form');
+        $data = null;
+        $error = null;
+        $title = 'Custom fields';
+	    $this->load->model('usercontact_model');
+	    $data['custom_field']=$this->usercontact_model->edit_customfiled($customfield_id);
+		$this->template->write_view('content','template/user/pages/editcustomfield',array('data'=>$data,'error'=>$error,'title'=>$title));
+        $this->template->render();
+			
+     }
+	  public function updatecustomfield()
+    {
+        $this->load->helper('form');
+        $error = null;
+        $title = 'Account Details Update';
+        $data = $this->input->post();
+        $this->load->model('usercontact_model');
+        if ($this->usercontact_model->customfield_update($data)) {
+            $msg = array(
+                'status' => true,
+                'class' => 'successbox',
+                'msg' => 'Update Successfully.'
+            );
+
+            $data = json_encode($msg);
+
+            $this->session->set_flashdata('msg', $data);
+        }
+        else
+        {
+            $msg = array(
+                'status' => false,
+                'class' => 'errormsgbox',
+                'msg' => 'Update Failed please try again.'
+            );
+
+            $data = json_encode($msg);
+
+            $this->session->set_flashdata('msg', $data);
+        }
+
+        redirect('usercontact/customfield');
+
+    }
+	
     }
