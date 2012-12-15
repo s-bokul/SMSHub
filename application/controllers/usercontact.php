@@ -206,5 +206,38 @@ class Usercontact extends User_Controller {
         $this->template->write_view('content','template/user/pages/importcontact',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
     }
+   
+   public function do_upload()
+    {
+  	
+    	$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size']	= '20000';
+		$config['max_width']  = '1024';
+		$config['max_height']  = '768';
 
-}
+	  $this->load->library('upload', $config);
+	 if($this->upload->do_upload()){
+		   $msg = array(
+                        'status' => true,
+                        'class' => 'successbox',
+                        'msg' => 'Import successfully.'
+                    );
+
+        $data = json_encode($msg);
+        $this->session->set_flashdata('msg', $data);
+	  }	
+	  else
+	  {
+        $msg = array(
+                        'status' => false,
+                        'class' => 'errormsgbox',
+                        'msg' => 'Import Fail.'
+                    );
+
+        $data = json_encode($msg);
+        $this->session->set_flashdata('msg', $data);
+        }
+       redirect('usercontact/importcontact');
+	  }
+    }
