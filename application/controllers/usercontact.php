@@ -196,5 +196,15 @@ class Usercontact extends User_Controller {
         }
        redirect('usercontact/addcontact');
     }
+	
+	public function importcontact()
+    {
+        $this->load->helper('form');
+        $data = null;
+        $error = null;
+        $title = 'Import Contact';
+        $this->template->write_view('content','template/user/pages/importcontact',array('data'=>$data,'error'=>$error,'title'=>$title));
+        $this->template->render();
+    }
 
 }

@@ -20,7 +20,7 @@
                 <li><a href="/usercontact">Find Contacts</a></li>
                 <li><a href="/usercontact/addcontact">Add Contacts</a></li>
                 <li><a href="/usercontact/contactlist">Contact List</a></li>
-                <li><a href="importcontact.html">Import Contacts</a></li>
+                <li><a href="/usercontact/importcontact">Import Contacts</a></li>
                 <li><a href="exportcontact.html">Export Contacts</a></li>
                 <li><a href="supressionlist.html">Suppression List</a></li>
                 <li><a href="suppresscontact.html">Supression Contacts</a></li>
