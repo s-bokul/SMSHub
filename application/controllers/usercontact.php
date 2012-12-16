@@ -145,7 +145,7 @@ class Usercontact extends User_Controller {
        redirect('usercontact/addcustomfield');
 	     }
     }
-	public function addcontact()
+	public function addcontact($row=0)
     {
         //$this->load->view('welcome_message');
         $this->load->helper('form');
@@ -157,7 +157,7 @@ class Usercontact extends User_Controller {
 	    $user_id=$user_info['user_id'];
 		$this->load->model('usercontact_model');
 		$data['contact_list']=$this->usercontact_model->show_contactlist($user_id);
-		$data['custom_field']=$this->usercontact_model->show_customfiled($user_id);
+		$data['custom_field']=$this->usercontact_model->show_customfiled($user_id,$row);
 		$this->template->write_view('content','template/user/pages/addcontact',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
     }
@@ -255,16 +255,24 @@ class Usercontact extends User_Controller {
         }
        redirect('usercontact/importcontact');
 	  }
-    public function customfield()
+    public function customfield($row=0)
     {
         $this->load->helper('form');
+		$this->load->library('pagination');
         $data = null;
         $error = null;
         $title = 'Custom fields';
 		$user_info = $this->session->userdata('user_info');
 	    $user_id=$user_info['user_id'];
 		$this->load->model('usercontact_model');
-		$data['custom_field']=$this->usercontact_model->show_customfiled($user_id);
+		$config['base_url']=base_url()."/index.php/usercontact/customfield";
+		$config['total_rows'] = $this->usercontact_model->countcustomfield($user_id);
+		$config['per_page'] = 5;
+		$config['next_link'] = 'Next >>';
+		$config['prev_link'] = '<< Prev';
+		$this->pagination->initialize($config); 
+		$data['custom_field']=$this->usercontact_model->show_customfiled($user_id,$row);
+		$data['links']=$this->pagination->create_links();
         $this->template->write_view('content','template/user/pages/customfields',array('data'=>$data,'error'=>$error,'title'=>$title));
         $this->template->render();
      }

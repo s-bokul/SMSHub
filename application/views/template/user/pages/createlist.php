@@ -7,7 +7,7 @@
 				
         ?>
 		<tr>
-			<th class="leftalign" colspan="2">Add Custom Field</th>
+			<th class="leftalign" colspan="2">Add Contact List</th>
 		</tr>
 		<tr>
 			<td style="width:100px">Name</td>
@@ -15,7 +15,7 @@
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
-			<td><button class="suplist">Save</button> &nbsp; <button class="suplist">Cancel</button></td>
+			<td><button class="suplist">Save</button> &nbsp; <button class="suplist" type="reset">Cancel</button></td>
 		</tr>
 	</table>
 <?php echo form_close();?>

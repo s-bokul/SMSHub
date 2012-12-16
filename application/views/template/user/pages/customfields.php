@@ -39,11 +39,9 @@
 	</table>
 	
 	<ul class="page">
-		<li class="page-prev"><a href="#"> << Prev</a></li>
-		<li><a href="#">1</a></li>
-		<li><a href="#">2</a></li>
-		<li><a href="#">3</a></li>
-		<li class="page-next"><a href="#">Next >> </a></li>
+	
+		<li class="page-prev"><?php echo $data['links'];?></li>
+		
 	</ul>
 
 	
