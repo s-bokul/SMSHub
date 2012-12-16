@@ -226,10 +226,12 @@ class Usercontact extends User_Controller {
     {
   	
     	$config['upload_path'] = './uploads/';
-		$config['allowed_types'] = 'gif|jpg|png';
+		//$config['allowed_types'] = 'gif|jpg|png';
+		$config['allowed_types'] = 'csv|xls|xlsx';
+		$config['file_name'] = 'phone';
 		$config['max_size']	= '20000';
-		$config['max_width']  = '1024';
-		$config['max_height']  = '768';
+		//$config['max_width']  = '1024';
+		//$config['max_height']  = '768';
 
 	  $this->load->library('upload', $config);
 	 if($this->upload->do_upload()){
@@ -253,8 +255,64 @@ class Usercontact extends User_Controller {
         $data = json_encode($msg);
         $this->session->set_flashdata('msg', $data);
         }
+		
+		$this->excel_reader();
+		
+		
        redirect('usercontact/importcontact');
-	  }
+	}
+	
+	public function excel_reader()
+	{
+		//file read
+		
+		$this->load->helper('file');
+		$file_name = get_filenames('./uploads/');
+		//echo $file_name[0];
+		
+		$this->load->library('excel');
+		$inputFileName = './uploads/'.$file_name[0];
+		if (strpos($inputFileName,'.csv') !== false) {
+			$objReader = new PHPExcel_Reader_CSV();
+		}else{
+				$inputFileType = PHPExcel_IOFactory::identify($inputFileName);
+				$objReader = PHPExcel_IOFactory::createReader($inputFileType);
+		}
+		
+		$objPHPExcel = $objReader->load($inputFileName);
+		$sheetData = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
+		//var_dump($sheetData);
+		$this->load->model('usercontact_model');
+		foreach($sheetData as $array){
+			//echo "array list:";
+			//var_dump($array);
+			foreach($array as $a){
+				//var_dump($a);
+				$phone = 0;
+				if(is_numeric($a))
+				{
+					if(substr($a,0,1)=="4" && strlen($a)==9)
+						//TODO:$a value save into database
+						//echo $a;
+						$phone = "61".$a;
+					if(substr($a,0,2)=="04" && strlen($a)==10)
+					{
+						$var = ltrim($a, '0');
+						$phone = "61".$var;
+					}
+				}
+				if($phone!=0)
+				{
+					$this->usercontact_model->insert_phone_number($phone);
+					
+				}
+				//echo "</br>";
+			}
+		}
+		delete_files('./uploads/');
+	}
+	  
+	  
     public function customfield($row=0)
     {
         $this->load->helper('form');

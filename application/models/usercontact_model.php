@@ -81,6 +81,16 @@ class Usercontact_model extends CI_Model{
 		return $row;
 	}
 	
+	public function insert_phone_number($phone)
+	{
+		echo "Phome :".$phone;
+		$data = array(
+               'phone' => $phone
+            );
+		$this->db->insert('phone_number',$data);
+
+	}
+	
 }
 
 
