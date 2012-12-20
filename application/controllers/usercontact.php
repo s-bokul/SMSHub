@@ -256,13 +256,18 @@ class Usercontact extends User_Controller {
         $this->session->set_flashdata('msg', $data);
         }
 		
-		$this->excel_reader();
+		
+		$f_row = $this->input->post('first_row');
+		$this->excel_reader($f_row['header']);
+		
+		
+		//var_dump($f_row['header']);
 		
 		
        redirect('usercontact/importcontact');
 	}
 	
-	public function excel_reader()
+	public function excel_reader($is_header)
 	{
 		//file read
 		
@@ -285,28 +290,46 @@ class Usercontact extends User_Controller {
 		$this->load->model('usercontact_model');
 		foreach($sheetData as $array){
 			//echo "array list:";
+			
+			if($is_header=="1")
+			{
+				$is_header="0";
+				continue;
+			}
 			//var_dump($array);
-			foreach($array as $a){
-				//var_dump($a);
-				$phone = 0;
-				if(is_numeric($a))
+			$a=$array["A"];
+			
+			$phone = 0;
+			if(is_numeric($a))
+			{
+				if(substr($a,0,1)=="4" && strlen($a)==9)
+					//TODO:$a value save into database
+					//echo $a;
+					$phone = "61".$a;
+				else if(substr($a,0,2)=="04" && strlen($a)==10)
 				{
-					if(substr($a,0,1)=="4" && strlen($a)==9)
-						//TODO:$a value save into database
-						//echo $a;
-						$phone = "61".$a;
-					if(substr($a,0,2)=="04" && strlen($a)==10)
-					{
-						$var = ltrim($a, '0');
-						$phone = "61".$var;
-					}
+					$var = ltrim($a, '0');
+					$phone = "61".$var;
 				}
-				if($phone!=0)
-				{
-					$this->usercontact_model->insert_phone_number($phone);
-					
-				}
-				//echo "</br>";
+				else if(substr($a,0,3)=="614" && strlen($a)==11)
+					$phone = $a;
+			}
+			else
+			{
+				$msg = array(
+                        'status' => false,
+                        'class' => 'errormsgbox',
+                        'msg' => 'Import Fail, May be imported file contain first row as a header. Please check mark the (First Row is Header) checkbox'
+                    );
+
+				$data = json_encode($msg);
+				$this->session->set_flashdata('msg', $data);
+				break;
+			}
+			if($phone!=0)
+			{
+				$this->usercontact_model->insert_phone_number($phone);
+				
 			}
 		}
 		delete_files('./uploads/');

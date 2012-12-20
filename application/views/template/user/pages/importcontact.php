@@ -45,7 +45,7 @@
 	
 		<tr>
 			<td>
-				<input type="checkbox"><label>First Row is Header</label>
+				<input type="checkbox" name="first_row[header]" value=1><label>First Row is Header</label>
 			</td>
 		</tr>
 	
